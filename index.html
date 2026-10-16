@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es-DO">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#080b17" />
+  <meta name="description" content="Cotiza identidad visual y branding profesional con Rey Polanco. Diseña tu propuesta, añade servicios y recibe un estimado al instante." />
+  <meta property="og:title" content="Rey Polanco · Cotiza tu marca" />
+  <meta property="og:description" content="Una marca a tu medida. Personaliza tu cotización de diseño y branding." />
+  <meta property="og:type" content="website" />
+  <title>Rey Polanco — Cotizador de Branding</title>
+  <link rel="icon" href="/assets/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <div id="site-root">
+    <header class="site-header">
+      <div class="shell topbar">
+        <a class="brand" href="https://rey-polanco-vercel.vercel.app/" aria-label="Rey Polanco: volver al portafolio">
+          <img src="/assets/logo-rey.png" width="39" height="46" alt="" />
+          <span>REY POLANCO<span class="brand-dot">.</span></span>
+        </a>
+        <nav class="topnav" aria-label="Secciones del cotizador">
+          <a href="#paquete">PAQUETES</a>
+          <a href="#extras">EXTRAS</a>
+          <a href="#tus-datos">TUS DATOS</a>
+        </nav>
+        <a class="back-link" href="https://rey-polanco-vercel.vercel.app/">VOLVER AL PORTAFOLIO <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-orb hero-orb-pink" aria-hidden="true"></div>
+        <div class="hero-orb hero-orb-blue" aria-hidden="true"></div>
+        <div class="shell hero-inner">
+          <div class="hero-topline"><span class="mini-dot"></span> CONSTRUYE TU PROPUESTA</div>
+          <div class="hero-meta">ESTRATEGIA VISUAL / BRANDING / IDENTIDAD</div>
+          <h1 id="hero-title">UNA MARCA<br />A TU <span>MEDIDA<b>.</b></span></h1>
+          <p class="hero-description">Selecciona los servicios que necesitas y obtén una cotización estimada, clara y a tu ritmo.</p>
+          <div class="hero-bottom">
+            <a class="hero-cta" href="#paquete">COMENZAR COTIZACIÓN <span aria-hidden="true">↘</span></a>
+            <span class="hero-footnote">TU MARCA EMPIEZA CON UNA BUENA DECISIÓN.</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="shell body-layout">
+        <div class="configurator">
+          <section class="step-section" id="paquete" aria-labelledby="package-heading">
+            <div class="section-intro"><span class="section-number">01</span><div><p class="section-kicker">PRIMER PASO</p><h2 id="package-heading">ELIGE TU BASE<span class="punctuation">.</span></h2><p class="section-description">Escoge el paquete que mejor se ajuste a lo que tu marca necesita.</p></div></div>
+            <div id="package-options" class="package-options" role="radiogroup" aria-label="Paquete de diseño"></div>
+            <div class="included-panel">
+              <div class="included-top"><h3>¿QUÉ INCLUYE TU PAQUETE?</h3><span class="included-tag">INCLUIDO</span></div>
+              <ul id="included-items" class="included-items"></ul>
+            </div>
+          </section>
+
+          <section class="step-section" id="extras" aria-labelledby="extras-heading">
+            <div class="section-intro"><span class="section-number">02</span><div><p class="section-kicker">PERSONALIZA</p><h2 id="extras-heading">AGREGA SERVICIOS<span class="punctuation">.</span></h2><p class="section-description">Refuerza tu propuesta con soluciones adicionales. Puedes seleccionarlas o quitarlas cuando quieras.</p></div></div>
+            <div id="addon-options"></div>
+            <div class="notice"><span aria-hidden="true">ⓘ</span><p><strong>Solo servicios de diseño.</strong> Los precios no incluyen impresión, fabricación ni producción física. Los precios de los extras son ilustrativos hasta que confirmemos las tarifas.</p></div>
+          </section>
+
+          <section class="step-section" id="tus-datos" aria-labelledby="data-heading">
+            <div class="section-intro"><span class="section-number">03</span><div><p class="section-kicker">CASI LISTO</p><h2 id="data-heading">CUÉNTAME TU IDEA<span class="punctuation">.</span></h2><p class="section-description">Estos datos se incluyen en la cotización que compartas o imprimas.</p></div></div>
+            <form class="client-form" id="client-form" novalidate>
+              <div class="form-grid">
+                <label>Nombre del cliente <input id="client-name" type="text" placeholder="¿Cómo te llamas?" autocomplete="name" maxlength="100" /></label>
+                <label>Nombre de la marca <input id="brand-name" type="text" placeholder="Nombre de tu proyecto" maxlength="100" /></label>
+              </div>
+              <label>Correo electrónico <span class="optional">OPCIONAL</span><input id="email" type="email" placeholder="nombre@empresa.com" autocomplete="email" maxlength="150" /></label>
+              <label>Cuéntame brevemente qué necesitas <span class="optional">OPCIONAL</span><textarea id="notes" placeholder="Objetivos, plazos y cualquier detalle importante..." rows="4" maxlength="700"></textarea></label>
+            </form>
+          </section>
+        </div>
+
+        <aside class="quote-panel" id="resumen" aria-labelledby="summary-heading">
+          <div class="quote-card">
+            <div class="quote-top"><div><p class="section-kicker">ESTIMADO EN TIEMPO REAL</p><h2 id="summary-heading">TU COTIZACIÓN<span class="punctuation">.</span></h2></div><span class="live-indicator"><span class="live-dot"></span> EN VIVO</span></div>
+            <div class="quote-contents">
+              <div class="summary-subheading">PAQUETE BASE</div>
+              <div id="summary-package" class="summary-row"></div>
+              <div id="summary-addons" class="summary-addons" aria-live="polite"></div>
+              <div class="tax-control"><label for="include-itbis"><span><strong>Agregar ITBIS (18 %)</strong><small>Opcional · sobre el subtotal</small></span><input id="include-itbis" type="checkbox" role="switch" /></label></div>
+              <div class="totals" aria-live="polite"><div class="price-row"><span>Subtotal</span><strong id="subtotal">RD$0</strong></div><div class="price-row" id="tax-row" hidden><span>ITBIS (18 %)</span><strong id="itbis">RD$0</strong></div></div>
+              <div class="total-highlight"><span>TOTAL ESTIMADO</span><output id="total" aria-label="Total estimado">RD$0</output></div>
+              <div class="payment-grid"><div><span>ANTICIPO 50 %</span><strong id="advance">RD$0</strong></div><div><span>BALANCE RESTANTE</span><strong id="balance">RD$0</strong></div></div>
+              <div class="quote-actions"><button id="whatsapp-btn" class="action-btn action-main" type="button">SOLICITAR COTIZACIÓN <span aria-hidden="true">↗</span></button><div class="secondary-actions"><button type="button" id="copy-btn" class="action-btn action-outline">COPIAR RESUMEN <span aria-hidden="true">⧉</span></button><button type="button" id="print-btn" class="action-btn action-outline">GUARDAR PDF <span aria-hidden="true">↓</span></button></div></div>
+              <p class="disclaimer">Cotización preliminar, sujeta a confirmación de alcance y plazos. No constituye una factura.</p>
+            </div>
+          </div>
+          <div class="reset-area"><button id="reset-btn" type="button">↺ &nbsp; REINICIAR COTIZACIÓN</button><p>Tu selección se guarda solo en este navegador.</p></div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="site-footer"><div class="shell footer-inner"><a class="footer-brand" href="https://rey-polanco-vercel.vercel.app/">REY POLANCO<span>.</span></a><span>ESTRATEGIA PRIMERO. DISEÑO DESPUÉS.</span><a href="https://rey-polanco-vercel.vercel.app/">VISITAR PORTAFOLIO ↗</a></div></footer>
+  </div>
+
+  <div id="print-sheet" class="print-sheet" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

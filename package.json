@@ -1,0 +1,17 @@
+{
+  "name": "cotizador-demarca",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Cotizador independiente de branding e identidad visual — Rey Polanco",
+  "scripts": {
+    "dev": "node server.mjs",
+    "build": "node build.mjs",
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "npm test && npm run build"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
