@@ -12,8 +12,9 @@
   <link rel="icon" href="/assets/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/fidelidad.css" />
   <script type="module" src="/app.js"></script>
 </head>
 <body>
@@ -24,12 +25,7 @@
           <img src="/assets/logo-rey.png" width="39" height="46" alt="" />
           <span>REY POLANCO<span class="brand-dot">.</span></span>
         </a>
-        <nav class="topnav" aria-label="Secciones del cotizador">
-          <a href="#paquete">PAQUETES</a>
-          <a href="#extras">EXTRAS</a>
-          <a href="#tus-datos">TUS DATOS</a>
-        </nav>
-        <a class="back-link" href="https://rey-polanco-vercel.vercel.app/">VOLVER AL PORTAFOLIO <span aria-hidden="true">↗</span></a>
+        <div class="header-country">REPÚBLICA DOMINICANA</div>
       </div>
     </header>
 
@@ -38,30 +34,26 @@
         <div class="hero-orb hero-orb-pink" aria-hidden="true"></div>
         <div class="hero-orb hero-orb-blue" aria-hidden="true"></div>
         <div class="shell hero-inner">
-          <div class="hero-topline"><span class="mini-dot"></span> CONSTRUYE TU PROPUESTA</div>
-          <div class="hero-meta">ESTRATEGIA VISUAL / BRANDING / IDENTIDAD</div>
+          <div class="hero-topline"><span class="mini-dot"></span> COTIZA</div>
+
           <h1 id="hero-title">UNA MARCA<br />A TU <span>MEDIDA<b>.</b></span></h1>
-          <p class="hero-description">Selecciona los servicios que necesitas y obtén una cotización estimada, clara y a tu ritmo.</p>
-          <div class="hero-bottom">
-            <a class="hero-cta" href="#paquete">COMENZAR COTIZACIÓN <span aria-hidden="true">↘</span></a>
-            <span class="hero-footnote">TU MARCA EMPIEZA CON UNA BUENA DECISIÓN.</span>
-          </div>
+          <p class="hero-description">Construye tu cotización seleccionando los servicios que necesitas.</p>
         </div>
       </section>
 
       <div class="shell body-layout">
         <div class="configurator">
           <section class="step-section" id="paquete" aria-labelledby="package-heading">
-            <div class="section-intro"><span class="section-number">01</span><div><p class="section-kicker">PRIMER PASO</p><h2 id="package-heading">ELIGE TU BASE<span class="punctuation">.</span></h2><p class="section-description">Escoge el paquete que mejor se ajuste a lo que tu marca necesita.</p></div></div>
+            <div class="section-intro"><span class="section-number">01</span><div><h2 id="package-heading">ELIGE TU BASE</h2><p class="section-description">Selecciona el paquete que mejor se adapte a las necesidades y presupuesto de tu proyecto.</p></div></div>
             <div id="package-options" class="package-options" role="radiogroup" aria-label="Paquete de diseño"></div>
             <div class="included-panel">
-              <div class="included-top"><h3>¿QUÉ INCLUYE TU PAQUETE?</h3><span class="included-tag">INCLUIDO</span></div>
+              <div class="included-top"><h3>INCLUIDO EN EL PRECIO BASE</h3></div>
               <ul id="included-items" class="included-items"></ul>
             </div>
           </section>
 
           <section class="step-section" id="extras" aria-labelledby="extras-heading">
-            <div class="section-intro"><span class="section-number">02</span><div><p class="section-kicker">PERSONALIZA</p><h2 id="extras-heading">AGREGA SERVICIOS<span class="punctuation">.</span></h2><p class="section-description">Refuerza tu propuesta con soluciones adicionales. Puedes seleccionarlas o quitarlas cuando quieras.</p></div></div>
+            <div class="section-intro"><span class="section-number">02</span><div><h2 id="extras-heading">AGREGA SERVICIOS</h2><p class="section-description">Selecciona los servicios adicionales que necesitas. Puedes quitarlos cuando quieras.</p></div></div>
             <div id="addon-options"></div>
             <div class="notice"><span aria-hidden="true">ⓘ</span><p><strong>Solo servicios de diseño.</strong> Los precios no incluyen impresión, fabricación ni producción física. Los precios de los extras son ilustrativos hasta que confirmemos las tarifas.</p></div>
           </section>
@@ -81,17 +73,43 @@
 
         <aside class="quote-panel" id="resumen" aria-labelledby="summary-heading">
           <div class="quote-card">
-            <div class="quote-top"><div><p class="section-kicker">ESTIMADO EN TIEMPO REAL</p><h2 id="summary-heading">TU COTIZACIÓN<span class="punctuation">.</span></h2></div><span class="live-indicator"><span class="live-dot"></span> EN VIVO</span></div>
-            <div class="quote-contents">
-              <div class="summary-subheading">PAQUETE BASE</div>
+            <div class="quote-title-row">
+              <h2 id="summary-heading">TU COTIZACIÓN</h2>
+              <span>ESTIMADO</span>
+            </div>
+            <div class="quote-base">
+              <p class="summary-subheading">BASE</p>
               <div id="summary-package" class="summary-row"></div>
-              <div id="summary-addons" class="summary-addons" aria-live="polite"></div>
-              <div class="tax-control"><label for="include-itbis"><span><strong>Agregar ITBIS (18 %)</strong><small>Opcional · sobre el subtotal</small></span><input id="include-itbis" type="checkbox" role="switch" /></label></div>
-              <div class="totals" aria-live="polite"><div class="price-row"><span>Subtotal</span><strong id="subtotal">RD$0</strong></div><div class="price-row" id="tax-row" hidden><span>ITBIS (18 %)</span><strong id="itbis">RD$0</strong></div></div>
-              <div class="total-highlight"><span>TOTAL ESTIMADO</span><output id="total" aria-label="Total estimado">RD$0</output></div>
-              <div class="payment-grid"><div><span>ANTICIPO 50 %</span><strong id="advance">RD$0</strong></div><div><span>BALANCE RESTANTE</span><strong id="balance">RD$0</strong></div></div>
-              <div class="quote-actions"><button id="whatsapp-btn" class="action-btn action-main" type="button">SOLICITAR COTIZACIÓN <span aria-hidden="true">↗</span></button><div class="secondary-actions"><button type="button" id="copy-btn" class="action-btn action-outline">COPIAR RESUMEN <span aria-hidden="true">⧉</span></button><button type="button" id="print-btn" class="action-btn action-outline">GUARDAR PDF <span aria-hidden="true">↓</span></button></div></div>
-              <p class="disclaimer">Cotización preliminar, sujeta a confirmación de alcance y plazos. No constituye una factura.</p>
+            </div>
+            <div id="summary-addons" class="summary-addons" aria-live="polite"></div>
+            <div class="totals" aria-live="polite">
+              <div class="price-row"><span>Subtotal</span><strong id="subtotal">RD$0</strong></div>
+              <div class="price-row" id="tax-row" hidden><span>ITBIS (18 %)</span><strong id="itbis">RD$0</strong></div>
+            </div>
+            <div class="tax-control">
+              <label for="include-itbis">
+                <input id="include-itbis" type="checkbox" />
+                <span><strong>Incluir ITBIS (18%)</strong><small>· opcional</small></span>
+              </label>
+            </div>
+            <div class="total-highlight">
+              <span>TOTAL ESTIMADO</span>
+              <output id="total" aria-label="Total estimado">RD$0</output>
+              <div class="payment-grid">
+                <div><span>Anticipo sugerido (50%)</span><strong id="advance">RD$0</strong></div>
+                <div><span>A la entrega</span><strong id="balance">RD$0</strong></div>
+              </div>
+            </div>
+            <p class="disclaimer">Precios estimados en pesos dominicanos (DOP), sujetos a confirmación según el alcance final del proyecto.</p>
+            <div class="quote-actions">
+              <button id="whatsapp-btn" class="action-btn action-main" type="button" aria-label="Enviar la cotización por WhatsApp">
+                <svg width="21" height="21" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/></svg>
+                Enviar por WhatsApp
+              </button>
+              <div class="secondary-actions">
+                <button type="button" id="copy-btn" class="action-btn action-outline"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg> Copiar cotización</button>
+                <button type="button" id="print-btn" class="action-btn action-outline"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M13 2v7h7M12 12v7m-3-3 3 3 3-3"/></svg> Guardar PDF</button>
+              </div>
             </div>
           </div>
           <div class="reset-area"><button id="reset-btn" type="button">↺ &nbsp; REINICIAR COTIZACIÓN</button><p>Tu selección se guarda solo en este navegador.</p></div>

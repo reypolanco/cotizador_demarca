@@ -18,14 +18,14 @@ export const PACKAGES = Object.freeze([
     id: 'identidad',
     name: 'Identidad visual',
     price: 10000,
-    description: 'El sistema visual esencial para que tu marca sea profesional, consistente y reconocible.',
+    description: 'El sistema visual esencial para que tu marca se vea profesional y consistente en todo lugar.',
     eyebrow: 'IDENTIDAD ESENCIAL',
   },
   {
     id: 'branding',
     name: 'Branding completo',
-    price: 20000,
-    description: 'La identidad visual más personalidad, voz y dirección estratégica de marca.',
+    price: 30000,
+    description: 'Todo lo de identidad visual, más estrategia de marca, análisis de competencia y la personalidad y el tono con el que tu marca se expresa.',
     eyebrow: 'SOLUCIÓN INTEGRAL',
   },
 ]);
@@ -39,13 +39,13 @@ export const BASE_INCLUDED = Object.freeze([
   'Tipografía',
   'Diseño de papelería básica',
   'Retículas',
-  'Mini guía de marca',
+  'Mini guía',
   'Usos correctos e incorrectos',
 ]);
 
 export function includedFor(packageId) {
   return packageId === 'branding'
-    ? [...BASE_INCLUDED, 'Personalidad y tono de marca']
+    ? [...BASE_INCLUDED, 'Personalidad y tono de marca', 'Estrategia de marca', 'Análisis de competencia']
     : [...BASE_INCLUDED];
 }
 
@@ -54,12 +54,24 @@ export function includedFor(packageId) {
 export const ADDON_GROUPS = Object.freeze([
   {
     title: 'Estrategia',
-    subtitle: 'Profundiza en las decisiones que hacen distinta a tu marca.',
     items: [
-      {id:'naming', name:'Naming de marca', price:7500, description:'Propuestas de nombres y criterios para su selección.'},
-      {id:'eslogan', name:'Eslogan de marca', price:3500, description:'Concepto verbal y frase de posicionamiento.'},
-      {id:'analisis', name:'Análisis competitivo', price:6000, description:'Exploración de mercado y referencias de categoría.'},
-      {id:'manual', name:'Manual de marca extendido', price:8000, description:'Normas, aplicaciones y lineamientos avanzados.'},
+      {id:'estrategia', name:'Estrategia de marca', price:25000, description:'Propósito, posicionamiento, público y propuesta de valor.'},
+      {id:'analisis', name:'Análisis de competencia', price:8500, description:'Estudio visual y de mensaje de tu mercado.'},
+      {id:'naming', name:'Naming', price:10000, description:'Creación y validación del nombre de tu marca.'},
+    ],
+  },
+  {
+    title:'Identidad extendida',
+    items: [
+      {id:'manual', name:'Manual de marca', price:12000, description:'Guía completa para aplicar tu identidad sin errores.'},
+      {id:'animacion', name:'Animación de logo', price:9000, description:'Tu logotipo en movimiento para video y redes.'},
+      {id:'isotipo', name:'Isotipo adicional', price:5500, description:'Símbolo complementario para usos reducidos.'},
+    ],
+  },
+  {
+    title:'Logotipo',
+    items:[
+      {id:'logo-adicional', name:'Propuesta de logo adicional', pricing:'percentage', rate:0.25, description:'Una propuesta de logotipo más para elegir. Suma el 25% al total de los servicios.'},
     ],
   },
 ]);
@@ -71,11 +83,28 @@ export function formatDOP(amount) {
   return 'RD$' + Math.round(Number(amount)).toLocaleString('en-US');
 }
 
+export function formatAddonLabel(addon, resolvedPrice = addon?.price ?? 0) {
+  if (addon?.pricing === 'percentage') return `+${Math.round((addon.rate || 0) * 100)}%`;
+  return formatDOP(resolvedPrice);
+}
+
 export function computeQuote({packageId = 'identidad', addonIds = [], includeItbis = false} = {}) {
   const pkg = PACKAGES.find(p => p.id === packageId) ?? PACKAGES[0];
   const selected = new Set(Array.isArray(addonIds) ? addonIds : []);
-  const addons = ADDONS.filter(a => selected.has(a.id));
-  const subtotal = pkg.price + addons.reduce((sum, a) => sum + a.price, 0);
+  const selectedAddons = ADDONS.filter(a => selected.has(a.id));
+
+  // La propuesta de logo se calcula sobre paquete + extras fijos antes de impuestos.
+  const fixedAddons = selectedAddons.filter(a => a.pricing !== 'percentage' && !(pkg.id === 'branding' && ['analisis','estrategia'].includes(a.id)));
+  const beforePercentage = pkg.price + fixedAddons.reduce((sum, addon) => sum + addon.price, 0);
+  const addons = selectedAddons
+    .filter(a => !(pkg.id === 'branding' && ['analisis','estrategia'].includes(a.id)))
+    .map(addon => {
+      const price = addon.pricing === 'percentage'
+        ? Math.round(beforePercentage * (addon.rate || 0))
+        : Number(addon.price || 0);
+      return {...addon, price, priceLabel: formatAddonLabel(addon, price)};
+    });
+  const subtotal = pkg.price + addons.reduce((sum, addon) => sum + addon.price, 0);
   const itbis = includeItbis ? Math.round(subtotal * FINANCE.itbisRate) : 0;
   const total = subtotal + itbis;
   const advance = Math.round(total * FINANCE.advanceRate);
@@ -95,7 +124,7 @@ export function buildQuoteText({packageId,addonIds,includeItbis,clientName='',br
     q.pkg.name + ' — ' + formatDOP(q.pkg.price),
     ...includedFor(q.pkg.id).map(item=>'✓ '+item),
   ];
-  if(q.addons.length){rows.push('', 'SERVICIOS ADICIONALES',...q.addons.map(a=>a.name+' — '+formatDOP(a.price)));}
+  if(q.addons.length){rows.push('', 'SERVICIOS ADICIONALES',...q.addons.map(a=>a.name+' — '+(a.pricing === 'percentage' ? `${formatDOP(a.price)} (${a.priceLabel})` : formatDOP(a.price))));}
   rows.push('','Subtotal: '+formatDOP(q.subtotal),'ITBIS (18%): '+(includeItbis?formatDOP(q.itbis):'No incluido'),'TOTAL ESTIMADO: '+formatDOP(q.total),'Anticipo (50%): '+formatDOP(q.advance),'Balance: '+formatDOP(q.balance));
   if(notes.trim())rows.push('','Notas: '+notes.trim());
   rows.push('','Cotización preliminar sujeta a confirmación de alcance, tiempos e impuestos. No incluye impresión ni producción.','Rey Polanco · Estrategia visual y branding');

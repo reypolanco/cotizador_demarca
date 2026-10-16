@@ -3,8 +3,9 @@
 Proyecto **independiente de v0**, hecho con HTML, CSS y JavaScript modular. Mantiene la estética azul noche + magenta, el logo de Rey Polanco y las funciones de cotización. **No requiere comprar créditos ni instalar librerías** para compilar.
 
 ## Funcionalidades
-- Identidad visual (**RD$10,000**) y Branding completo (**RD$20,000**).
+- Identidad visual (**RD$10,000**) y Branding completo (**RD$30,000**).
 - Paquete incluido con **Diseño de papelería básica**.
+- Branding incluye estrategia de marca y análisis de competencia. Naming RD$10,000. Propuesta de logo adicional +25 % del subtotal antes de impuestos.
 - Extras de estrategia seleccionables. Se han eliminado las categorías que podían confundirse con precios de producción.
 - Totales instantáneos, ITBIS opcional del 18 %, anticipo del 50 % y balance.
 - Nombre de cliente, nombre de marca, correo y notas; copia del resumen, WhatsApp, imprimir/guardar como PDF.
@@ -12,7 +13,7 @@ Proyecto **independiente de v0**, hecho con HTML, CSS y JavaScript modular. Mant
 - Clic en el logo **REY POLANCO → https://rey-polanco-vercel.vercel.app/**.
 - Responsive y preparado para dispositivos móviles.
 
-> **IMPORTANTE SOBRE PRECIOS:** Los dos precios base están confirmados. **Los importes de los servicios adicionales son ejemplos** que deben revisarse antes de usar el cotizador en producción. Estos valores se editan en `quote-core.mjs`. La herramienta calcula estimados; no procesa pagos.
+> **IMPORTANTE SOBRE PRECIOS:** Los dos precios base están confirmados. **Las tarifas de los servicios adicionales no confirmadas específicamente son ejemplos** que deben revisarse antes de usar el cotizador en producción. Estos valores se editan en `quote-core.mjs`. La herramienta calcula estimados; no procesa pagos.
 
 ## Probar en tu computadora
 
@@ -75,3 +76,15 @@ Cuando el repositorio esté conectado a ChatGPT mediante GitHub, será posible e
 
 ## Privacidad y presupuestos
 Los datos rellenados se guardan **solo en el navegador** mediante `localStorage`. No hay base de datos ni captura de leads en un servidor. WhatsApp solo se abre al pulsar el botón correspondiente. La impresión funciona desde el navegador. Antes de usarlo comercialmente, confirma tarifas, impuestos y términos aplicables a cada contrato.
+
+
+## Dirección visual de referencia
+
+- Esta edición usa **Poppins Black (900)** en los títulos (Google Fonts, sin empaquetar tipografías).
+- Se ajustó la portada a la referencia original de v0: fondo azul noche con resplandor magenta, rotulación blanca/fucsia y contraste alto.
+- Se mantuvieron los cambios comerciales: branding RD$30,000 (estrategia de marca y análisis incluidos), naming RD$10,000, propuesta de logo adicional +25% sobre el subtotal previo a impuestos.
+- La página original de referencia cuenta con control de acceso y no fue posible inspeccionar su CSS, DOM o todas las vistas. Por eso **esta es una reconstrucción visual cercana**, no una copia pixel-perfect validada con el original.
+
+
+## Versión reconstruida a partir de capturas
+Se incorporó `fidelidad.css`, hoja de estilos que reproduce las capturas facilitadas: portada monumental con Poppins Black 900, tarjetas de selección y servicios, cotización magenta con botón azul, y formulario. El proyecto incluye los precios RD$10,000 / RD$30,000, los extras ilustrados en las referencias, la propuesta de logo adicional +25%, impresión y WhatsApp. Las capturas constituyen referencias de diseño, no archivos fuente originales. Para publicar usa Vercel Framework Other, Build `npm run build`, Output `dist`.
