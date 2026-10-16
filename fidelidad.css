@@ -195,3 +195,11 @@ body{background:#080b17;font-family:var(--font-body);color:#fff}
 @media(min-width:876px){
   .hero h1{font-size:clamp(88px,11.5vw,158px);line-height:.87;letter-spacing:-.050em;margin:26px 0 18px}
 }
+
+/* Enlace privado de cotización disponible tras generar el PDF */
+.generated-quote{display:flex;flex-wrap:wrap;align-items:center;gap:9px;padding:12px 11px;margin-top:10px;background:#101d3b;border:1px solid #3c5692;border-radius:11px;color:#c3d4fa;font-size:11px;line-height:1.4}
+.generated-quote[hidden]{display:none!important}
+.generated-quote span{flex-basis:100%;color:#bfcdee}
+.generated-quote a,.generated-quote button{color:#fff;background:#243c7d;border:1px solid #4161ad;border-radius:7px;padding:7px 10px;font:700 11px Inter,Arial,sans-serif;text-decoration:none;cursor:pointer}
+.generated-quote a:hover,.generated-quote button:hover{background:#3456b1}
+#whatsapp-btn:disabled{opacity:.6;cursor:wait;transform:none}

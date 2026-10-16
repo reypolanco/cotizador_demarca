@@ -107,17 +107,51 @@ async function copyQuote(){
     const input=document.createElement('textarea');input.value=quote;input.style.position='fixed';input.style.opacity='0';document.body.appendChild(input);input.select();const success=document.execCommand('copy');input.remove();toast(success?'Resumen copiado.':'No se pudo copiar automáticamente.');
   }
 }
-function requestQuote(){
-  const message=buildQuoteText(state);
-  const phone=BRAND.whatsapp.replace(/[^\d]/g,'');
-  const base=phone?`https://wa.me/${phone}`:'https://api.whatsapp.com/send';
-  window.open(`${base}?text=${encodeURIComponent(message)}`,'_blank','noopener,noreferrer');
+async function requestQuote(){
+  const btn=byId('whatsapp-btn');
+  if(btn.disabled) return;
+  // Abre una pestaña inmediatamente para evitar el bloqueo de ventanas emergentes.
+  const whatsappTab=window.open('about:blank','_blank');
+  if(whatsappTab){try{whatsappTab.document.body.innerHTML='<p style="font-family:Arial,sans-serif;padding:24px">Generando tu cotización en PDF…</p>';}catch{}}
+  btn.disabled=true;
+  btn.setAttribute('aria-busy','true');
+  byId('generated-quote').hidden=true;
+  toast('Generando PDF y creando enlace privado…');
+  try{
+    const response=await fetch('/api/cotizacion',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(state),
+      cache:'no-store',
+    });
+    const payload=await response.json().catch(()=>({}));
+    if(!response.ok || !payload.url) throw new Error(payload.error || 'No se pudo generar el PDF.');
+    const secureLink=payload.url;
+    const box=byId('generated-quote');
+    box.hidden=false;
+    const anchor=byId('generated-pdf-link');
+    anchor.href=secureLink;
+    const message=`Hola, quisiera solicitar una cotización de branding. Aquí está el PDF con los servicios y el presupuesto seleccionado (enlace válido durante 7 días):\n${secureLink}`;
+    const phone=BRAND.whatsapp.replace(/[^\d]/g,'');
+    const whatsappUrl=`https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    if(whatsappTab && !whatsappTab.closed){whatsappTab.location.replace(whatsappUrl)}
+    else window.location.assign(whatsappUrl);
+    toast('PDF creado. Confirma el envío del enlace en WhatsApp.');
+  }catch(error){
+    if(whatsappTab&&!whatsappTab.closed)whatsappTab.close();
+    toast(error?.message || 'Error al crear el PDF. Vuelve a intentarlo.');
+  }finally{
+    btn.disabled=false;
+    btn.removeAttribute('aria-busy');
+  }
 }
+
 function resetQuote(){
   if(!window.confirm('¿Quieres borrar los datos y reiniciar la cotización?'))return;
   state=defaultState();
   ['client-name','brand-name','email','notes'].forEach((id,i)=>{byId(id).value=['','','',''][i];});
   byId('include-itbis').checked=false;
+  byId('generated-quote').hidden=true;
   renderPackages();renderIncluded();renderAddons();updateSummary();persist();
   toast('Cotización reiniciada.');window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -129,6 +163,12 @@ function init(){
   byId('include-itbis').checked=state.includeItbis;
   byId('include-itbis').addEventListener('change',e=>{state.includeItbis=e.target.checked;updateSummary();persist();});
   byId('copy-btn').addEventListener('click',copyQuote);
+  byId('copy-pdf-link').addEventListener('click', async ()=>{
+    const url=byId('generated-pdf-link').href;
+    if(!url || url.endsWith('#')) return;
+    try{await navigator.clipboard.writeText(url);toast('Enlace al PDF copiado.');}
+    catch{toast('Selecciona el enlace para copiarlo manualmente.');}
+  });
   byId('whatsapp-btn').addEventListener('click',requestQuote);
   byId('print-btn').addEventListener('click',()=>{buildPrint();window.print();});
   byId('reset-btn').addEventListener('click',resetQuote);

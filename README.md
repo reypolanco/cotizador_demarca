@@ -1,3 +1,5 @@
+> **NOVEDAD: PDF privado con enlace temporal por WhatsApp.** Antes de usarlo es necesario configurar Vercel Blob y `QUOTE_LINK_SECRET`. Ver [DEPLOY-PDF.md](DEPLOY-PDF.md).
+
 # Rey Polanco — Cotizador de branding
 
 Proyecto **independiente de v0**, hecho con HTML, CSS y JavaScript modular. Mantiene la estética azul noche + magenta, el logo de Rey Polanco y las funciones de cotización. **No requiere comprar créditos ni instalar librerías** para compilar.
