@@ -32,7 +32,7 @@ class PDF {
   ensure(height=36){if(this.y+height>777){this.addPage();this.header(true);return true}return false;}
   header(continuation=false){
     this.rect(0,0,PAGE_W,110,COLORS.navy);this.rect(0,106,PAGE_W,4,COLORS.pink);
-    this.rect(38,24,63,65,COLORS.white);this.image(43,29,54,56);
+    this.image(38,24,63,65);
     this.text('REY POLANCO',115,35,21,'F2',COLORS.white);
     this.text('ESTRATEGIA VISUAL  /  BRANDING',116,65,8.7,'F2','#BBCBF9');
     this.right('COTIZACIÓN ESTIMADA',PAGE_W-42,35,12,'F2',COLORS.white);
